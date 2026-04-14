@@ -1,10 +1,11 @@
 # Visualization plotting utilities for federated learning results
 
+import json
+from pathlib import Path
+from typing import Dict, List
+
 import matplotlib.pyplot as plt
 import numpy as np
-from pathlib import Path
-from typing import List, Dict, Optional
-import json
 
 
 class ResultsVisualizer:

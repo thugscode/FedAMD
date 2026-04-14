@@ -1,368 +1,249 @@
-# Results Visualization Module - Complete Package
+# FedAMD Analysis Toolkit - Complete Documentation Index
 
-## 🎉 What's New
-
-A **production-ready Results Visualization Module** has been added to your FedAMD project!
-
-This module automatically tracks and visualizes all your federated learning experiments with beautiful plots, statistical analysis, and multi-algorithm comparison capabilities.
-
-## 📦 Package Contents
-
-### 📊 Core Module (Ready to Use)
-```
-visualization/
-├── __init__.py              # Package initialization
-├── metrics.py              # MetricsTracker & ExperimentComparison (263 lines)
-└── plots.py                # ResultsVisualizer (323 lines)
-```
-
-### 📚 Documentation (5 guides)
-1. **[START HERE] QUICK_REFERENCE.md** - 30-second quickstart + cheat sheet
-2. **INTEGRATION_GUIDE.md** - Step-by-step how to integrate (just 9 lines!)
-3. **VISUALIZATION_README.md** - Complete documentation + API reference
-4. **ARCHITECTURE.md** - System design with diagrams
-5. **BUILD_SUMMARY.md** - Overview + feature list + examples
-
-### 💡 Examples
-- **examples_visualization.py** - Working code examples for all use cases
-
-### ✅ Checklist
-- **DELIVERY_CHECKLIST.md** - Full list of what was delivered
+> **Navigation Hub** — Quick access to all documentation for the three analysis modules
 
 ---
 
-## 🚀 Quick Start (30 Seconds)
+## 📚 Documentation Structure
 
-### Step 1: Add import to your training script
-```python
-from visualization import MetricsTracker, ResultsVisualizer
-```
+The FedAMD Analysis Toolkit includes **3 powerful modules** with **consistent documentation patterns**:
 
-### Step 2: Initialize tracker
-```python
-tracker = MetricsTracker(f"{args.method}_{args.dataset}")
-tracker.log_config(method=args.method, dataset=args.dataset, ...)
-```
+### Visualization Module
+Track and visualize federated learning experiments with metrics, plots, and export options.
+- **[VISUALIZATION_QUICK_REFERENCE.md](VISUALIZATION_QUICK_REFERENCE.md)** — 30-second quickstart + API cheat sheet
+- **[VISUALIZATION_README.md](VISUALIZATION_README.md)** — Complete documentation + examples
 
-### Step 3: Log each training round (inside training loop)
-```python
-tracker.log_round(round_num, test_loss=loss, test_acc=acc, num_clients=10)
-```
+### Comparison Module  
+Compare algorithm performance across multiple experiments with side-by-side analysis and multi-algorithm visualizations.
+- **[COMPARISON_QUICK_REFERENCE.md](COMPARISON_QUICK_REFERENCE.md)** — 30-second quickstart + API cheat sheet
+- **[COMPARISON_GUIDE.md](COMPARISON_GUIDE.md)** — Complete documentation + examples
+- **[COMPARISON_BUILD_SUMMARY.md](COMPARISON_BUILD_SUMMARY.md)** — Feature overview + technical details
 
-### Step 4: Save and visualize at the end
-```python
-tracker.save_json()
-tracker.save_csv()
-visualizer = ResultsVisualizer()
-visualizer.plot_all(tracker.metrics, tracker.experiment_name)
-```
-
-**That's it! Just 9 lines of code added.**
+### Participation Module
+Analyze and visualize client participation patterns across training rounds with statistical insights.
+- **[PARTICIPATION_QUICK_REFERENCE.md](PARTICIPATION_QUICK_REFERENCE.md)** — 30-second quickstart + API cheat sheet
+- **[PARTICIPATION_GUIDE.md](PARTICIPATION_GUIDE.md)** — Complete documentation + examples
+- **[PARTICIPATION_BUILD_SUMMARY.md](PARTICIPATION_BUILD_SUMMARY.md)** — Feature overview + technical details
 
 ---
 
-## 📊 What You Get
+## 🚀 Where to Start
 
-### Automatically Generated Per Experiment
-```
-results/
-├── FedAvg_metrics.json           # Raw metrics (JSON)
-├── FedAvg_metrics.csv            # Spreadsheet format
-└── plots/
-    ├── accuracy_FedAvg.png       # Test vs train accuracy
-    ├── loss_FedAvg.png           # Test vs train loss
-    ├── convergence_FedAvg.png    # Best accuracy + 95% convergence
-    └── efficiency_FedAvg.png     # Accuracy + client participation
-```
+Choose your path based on what you need:
 
-### After Multiple Experiments
-```
-results/
-├── FedAvg_metrics.json
-├── FedAdapt_metrics.json
-├── SCAFFOLD_metrics.json
-└── plots/
-    ├── comparison_test_acc.png    # All algorithms on one plot
-    └── comparison_test_loss.png   # Easy algorithm comparison
-```
+| Goal | Start Here |
+|------|-----------|
+| **First time?** | [ANALYSIS_TOOLKIT_OVERVIEW.md](ANALYSIS_TOOLKIT_OVERVIEW.md) — Project overview |
+| **Need examples?** | examples_visualization.py, examples_comparison.py, examples_participation.py |
+| **Integrating into code?** | [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) — How to add to your training scripts |
+| **30-second overview** | QUICK_REFERENCE for the module you need |
+| **How does it work?** | The README file for your module |
+| **Feature checklist** | BUILD_SUMMARY for your module |
 
 ---
 
-## 💡 Key Features
+## 📁 Complete File Structure
 
-✅ **Metrics Tracking**
-- Test & training accuracy
-- Test & training loss
-- Client participation
-- Communication rounds
-- Convergence statistics
-
-✅ **Beautiful Visualizations**
-- Accuracy curves (test vs train)
-- Loss curves (test vs train)
-- Convergence analysis (best point highlighted)
-- Communication efficiency (accuracy + participation)
-- Algorithm comparison (multiple on one plot)
-
-✅ **Data Export**
-- JSON (complete + human-readable)
-- CSV (spreadsheet compatible)
-- Automatic timestamped naming
-- Structured for reproducibility
-
-✅ **Analysis Tools**
-- Best accuracy detection
-- Convergence round calculation (95% threshold)
-- Algorithm comparison tables
-- Statistical summaries
-
-✅ **Easy Integration**
-- Only 9 lines of code to add
-- No breaking changes
-- Works with existing code
-- Flexible logging (log what you need)
-
----
-
-## 🎓 Documentation Map
-
-```
-START HERE
-    ↓
-[QUICK_REFERENCE.md] ← 30-second quickstart
-    ↓
-[INTEGRATION_GUIDE.md] ← Exactly what to add to your code
-    ↓
-[examples_visualization.py] ← See it in action
-    ↓
-For more details:
-- [VISUALIZATION_README.md] ← Complete API reference
-- [ARCHITECTURE.md] ← System design understanding
-- [BUILD_SUMMARY.md] ← Feature overview
-```
-
----
-
-## 📖 Which Document to Read?
-
-| Need | Read |
-|------|------|
-| 30-second overview | QUICK_REFERENCE.md |
-| How to add to my code | INTEGRATION_GUIDE.md |
-| Working code examples | examples_visualization.py |
-| Complete API reference | VISUALIZATION_README.md |
-| System architecture | ARCHITECTURE.md |
-| Feature list | BUILD_SUMMARY.md |
-| What was delivered | DELIVERY_CHECKLIST.md |
-
----
-
-## 💼 Use Cases
-
-✅ **Track single experiment**
-```python
-tracker.log_round(round, test_loss, test_acc)
-tracker.save_json()
-```
-
-✅ **Compare algorithms**
-```python
-comp = ExperimentComparison()
-comp.load_all_experiments()
-comp.print_comparison()
-```
-
-✅ **Generate publication plots**
-```python
-viz = ResultsVisualizer()
-viz.plot_all(metrics, "experiment_name")  # 300dpi PNG files
-```
-
-✅ **Detailed analysis**
-```python
-# Load JSON and analyze however you want
-import json
-with open('results/metrics.json') as f:
-    data = json.load(f)
-    # Your custom analysis
-```
-
----
-
-## 🎯 Next Steps
-
-### Immediate (5 minutes)
-1. Read [QUICK_REFERENCE.md](QUICK_REFERENCE.md)
-2. Look at [examples_visualization.py](examples_visualization.py)
-3. Review [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)
-
-### Next Run (10 minutes)
-1. Add 9 lines to main_fmnist.py (see [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md))
-2. Run your experiment
-3. Check `results/` directory
-4. Beautiful plots are automatically generated!
-
-### When Comparing (20 minutes)
-1. Run multiple algorithms
-2. Load with ExperimentComparison
-3. Generate comparison plots
-4. See which performs best
-
-### For Publication (Later)
-1. Export plots (300dpi PNG)
-2. Export raw data (JSON for reproducibility)
-3. Share with collaborators
-4. Include in papers
-
----
-
-## 🔧 Technical Details
-
-### Dependencies
-- matplotlib (already in requirements.txt) ✓
-- numpy (already in requirements.txt) ✓
-- json (standard library) ✓
-- csv (standard library) ✓
-
-### Performance
-- Memory: ~1KB per tracked metric
-- Overhead: <1% of training time
-- No external API calls
-- No network I/O
-
-### Compatibility
-- Works with any federated learning algorithm
-- Python 3.6+
-- Linux/Mac/Windows
-
----
-
-## 📁 File Structure After Integration
-
-Your project will have:
 ```
 FedAMD/
-├── visualization/                    ← NEW MODULE
-│   ├── __init__.py
-│   ├── metrics.py
-│   └── plots.py
-├── algo/                             ← EXISTING
-├── data_model/                       ← EXISTING
-├── main_fmnist.py                    ← MODIFIED (+9 lines)
-├── main_emnist.py                    ← CAN MODIFY SAME WAY
 │
-├── VISUALIZATION_README.md           ← NEW
-├── INTEGRATION_GUIDE.md              ← NEW
-├── QUICK_REFERENCE.md                ← NEW
-├── BUILD_SUMMARY.md                  ← NEW
-├── ARCHITECTURE.md                   ← NEW
-├── DELIVERY_CHECKLIST.md             ← NEW
-├── examples_visualization.py          ← NEW
+├── 📊 VISUALIZATION MODULE
+│   ├── visualization/
+│   │   ├── __init__.py
+│   │   ├── metrics.py              (263 lines)
+│   │   └── plots.py                (319 lines)
+│   ├── VISUALIZATION_QUICK_REFERENCE.md
+│   └── VISUALIZATION_README.md
 │
-└── results/                          ← CREATED AT RUNTIME
-    ├── *.json
-    ├── *.csv
-    └── plots/
-        └── *.png
+├── 📈 COMPARISON MODULE
+│   ├── comparison/
+│   │   ├── __init__.py
+│   │   ├── tool.py                 (600+ lines)
+│   │   └── visualize.py            (453 lines)
+│   ├── COMPARISON_QUICK_REFERENCE.md
+│   ├── COMPARISON_GUIDE.md
+│   └── COMPARISON_BUILD_SUMMARY.md
+│
+├── 👥 PARTICIPATION MODULE
+│   ├── participation/
+│   │   ├── __init__.py
+│   │   ├── analyzer.py             (535 lines)
+│   │   └── visualize.py            (453 lines)
+│   ├── PARTICIPATION_QUICK_REFERENCE.md
+│   ├── PARTICIPATION_GUIDE.md
+│   └── PARTICIPATION_BUILD_SUMMARY.md
+│
+├── 📖 SHARED DOCUMENTATION
+│   ├── ANALYSIS_TOOLKIT_OVERVIEW.md    (main entry point)
+│   ├── INTEGRATION_GUIDE.md            (add to training scripts)
+│   ├── INDEX.md                        (this file)
+│   ├── README.md                       (project readme)
+│   └── LICENSE.md
+│
+├── 💡 EXAMPLES (1,200+ lines total)
+│   ├── examples_visualization.py
+│   ├── examples_comparison.py
+│   └── examples_participation.py
+│
+└── 📁 OTHER
+    ├── algo/
+    ├── data_model/
+    ├── main_fmnist.py
+    └── requirements.txt
 ```
 
 ---
 
-## ✨ Highlights
+## 🎯 Documentation Roadmap
 
-- 🏆 **Production-ready**: Tested patterns, full error handling
-- 📊 **Beautiful output**: Publication-quality plots at 300dpi
-- 🔧 **Easy integration**: Just 9 lines of code
-- 📚 **Well-documented**: 1,700+ lines of documentation
-- 🚀 **Zero overhead**: <1% impact on training
-- 🤝 **Backward compatible**: No breaking changes
-- 💪 **Extensible**: Easy to add custom metrics/plots
+**New to the toolkit?**
+1. Read [ANALYSIS_TOOLKIT_OVERVIEW.md](ANALYSIS_TOOLKIT_OVERVIEW.md) (5 min)
+2. Pick a module and read its QUICK_REFERENCE (3 min each)
+3. Run the corresponding example file (2 min)
+4. Read the README for detailed API (10 min)
+
+**Ready to integrate?**
+1. Read [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) (5 min)
+2. Copy the code snippets to your training scripts (5 min)
+3. Run your experiment and check results/ directory
+
+**Want complete understanding?**
+1. Read all three QUICK_REFERENCE files (9 min)
+2. Read all three README/GUIDE files (30 min)
+3. Explore all three example files (15 min)
+4. Study the BUILD_SUMMARY files for architecture (10 min)
 
 ---
 
-## ❓ FAQs
+## 📊 Module Overview
 
-**Q: How much code do I need to add?**  
-A: Just 9 lines! See [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)
+### Visualization: Track & Visualize Experiments
+```python
+from visualization import MetricsTracker, ResultsVisualizer
 
-**Q: Which metrics are required?**  
-A: At minimum: `test_acc`. Everything else is optional.
+tracker = MetricsTracker("experiment_name")
+tracker.log_round(round_num, test_loss=loss, test_acc=acc)
+tracker.save_json() and tracker.save_csv()
+ResultsVisualizer().plot_all(tracker.metrics, "experiment_name")
+```
 
-**Q: Does it slow down training?**  
-A: No, <1% overhead. Negligible impact.
+**Outputs:**
+- JSON/CSV metrics export
+- Accuracy & loss curves
+- Convergence analysis
+- Communication efficiency plots
 
-**Q: Can I compare algorithms?**  
-A: Yes! Run multiple algorithms and use `ExperimentComparison`
+---
 
-**Q: What formats are supported?**  
-A: JSON (analysis) and CSV (spreadsheet)
+### Comparison: Compare Multiple Algorithms
+```python
+from comparison import ComparisonTool
 
-**Q: Can I add custom metrics?**  
+tool = ComparisonTool()
+tool.load_experiments(["FedAvg", "FedAdapt", "SCAFFOLD"])
+tool.plot_comparison()
+tool.export_table()
+```
+
+**Outputs:**
+- Side-by-side algorithm comparison
+- Performance tables & statistics
+- Multi-algorithm visualization plots
+
+---
+
+### Participation: Analyze Client Participation
+```python
+from participation import ParticipationAnalyzer
+
+analyzer = ParticipationAnalyzer("experiment_name")
+analyzer.load_data()
+analyzer.analyze()
+analyzer.plot_insights()
+```
+
+**Outputs:**
+- Participation histograms
+- Trends over rounds
+- Client availability patterns
+- Statistical summaries
+
+---
+
+## 🔍 Quick Reference Links
+
+| What | Where |
+|------|-------|
+| Project overview | [ANALYSIS_TOOLKIT_OVERVIEW.md](ANALYSIS_TOOLKIT_OVERVIEW.md) |
+| Integration instructions | [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) |
+| Visualization quick start | [VISUALIZATION_QUICK_REFERENCE.md](VISUALIZATION_QUICK_REFERENCE.md) |
+| Visualization full guide | [VISUALIZATION_README.md](VISUALIZATION_README.md) |
+| Comparison quick start | [COMPARISON_QUICK_REFERENCE.md](COMPARISON_QUICK_REFERENCE.md) |
+| Comparison full guide | [COMPARISON_GUIDE.md](COMPARISON_GUIDE.md) |
+| Participation quick start | [PARTICIPATION_QUICK_REFERENCE.md](PARTICIPATION_QUICK_REFERENCE.md) |
+| Participation full guide | [PARTICIPATION_GUIDE.md](PARTICIPATION_GUIDE.md) |
+| Working examples (viz) | examples_visualization.py |
+| Working examples (comp) | examples_comparison.py |
+| Working examples (part) | examples_participation.py |
+
+---
+
+## 📝 All Documentation Files (13 total)
+
+**Shared Guides (5 files):**
+- ANALYSIS_TOOLKIT_OVERVIEW.md
+- INTEGRATION_GUIDE.md
+- INDEX.md (this file)
+- README.md
+- LICENSE.md
+
+**Visualization (2 files):**
+- VISUALIZATION_QUICK_REFERENCE.md
+- VISUALIZATION_README.md
+
+**Comparison (3 files):**
+- COMPARISON_QUICK_REFERENCE.md
+- COMPARISON_GUIDE.md
+- COMPARISON_BUILD_SUMMARY.md
+
+**Participation (3 files):**
+- PARTICIPATION_QUICK_REFERENCE.md
+- PARTICIPATION_GUIDE.md
+- PARTICIPATION_BUILD_SUMMARY.md
+
+---
+
+## ✅ Each Module Provides
+
+| Feature | Visualization | Comparison | Participation |
+|---------|---------------|-----------|---------------|
+| Track metrics | ✅ | — | — |
+| Visualize trends | ✅ | ✅ | ✅ |
+| Compare algorithms | — | ✅ | — |
+| Export data | ✅ | ✅ | ✅ |
+| Statistical analysis | ✅ | ✅ | ✅ |
+| Publication plots | ✅ | ✅ | ✅ |
+
+---
+
+## 🚀 Next Steps
+
+1. **Understand the toolkit**: Read [ANALYSIS_TOOLKIT_OVERVIEW.md](ANALYSIS_TOOLKIT_OVERVIEW.md)
+2. **See it in action**: Run any examples_*.py file
+3. **Integrate into code**: Follow [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)
+4. **Learn your module**: Read the appropriate QUICK_REFERENCE + README
+
+---
+
+## ❓ Need Help?
+
+Check the relevant QUICK_REFERENCE or README for your module — each contains:
+- Common usage patterns
+- Complete API reference
+- Code examples
+- Troubleshooting tips
+- FAQs  
 A: Yes, the module is flexible about what you log
 
 **Q: Do I need to modify existing code significantly?**  
 A: No! Just add 9 lines. Fully backward compatible.
-
----
-
-## 📞 Help & Support
-
-- **Quick questions**: [QUICK_REFERENCE.md](QUICK_REFERENCE.md)
-- **How to integrate**: [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)
-- **Code examples**: [examples_visualization.py](examples_visualization.py)
-- **API reference**: [VISUALIZATION_README.md](VISUALIZATION_README.md)
-- **Troubleshooting**: See README section
-- **Architecture**: [ARCHITECTURE.md](ARCHITECTURE.md)
-
----
-
-## 🎯 Summary
-
-| Aspect | Status |
-|--------|--------|
-| Core Module | ✅ Complete (586 lines) |
-| Documentation | ✅ Complete (1,750+ lines) |
-| Examples | ✅ Complete (286 lines) |
-| Integration Effort | ✅ Minimal (9 lines) |
-| Breaking Changes | ✅ None |
-| New Dependencies | ✅ None |
-| Ready to Use | ✅ Yes! |
-
----
-
-## 🚀 Get Started Now!
-
-1. **Read**: [QUICK_REFERENCE.md](QUICK_REFERENCE.md) (5 min)
-2. **Integrate**: [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) (5 min)
-3. **Run**: Your training script with tracking (automatic!)
-4. **Visualize**: Beautiful plots appear automatically
-5. **Compare**: Multiple experiments easily
-
-**That's it! Your experiments are now fully tracked and visualized!** 🎉
-
----
-
-## 📋 Complete File List
-
-All created/modified files:
-- ✅ `visualization/__init__.py`
-- ✅ `visualization/metrics.py`
-- ✅ `visualization/plots.py`
-- ✅ `QUICK_REFERENCE.md`
-- ✅ `INTEGRATION_GUIDE.md`
-- ✅ `VISUALIZATION_README.md`
-- ✅ `BUILD_SUMMARY.md`
-- ✅ `ARCHITECTURE.md`
-- ✅ `DELIVERY_CHECKLIST.md`
-- ✅ `examples_visualization.py`
-- ✅ `INDEX.md` (this file)
-
----
-
-**Ready to visualize your federated learning experiments?** 🚀
-
-[Start with QUICK_REFERENCE.md →](QUICK_REFERENCE.md)
-
----
-
-*Results Visualization Module | Version 1.0 | April 2026*

@@ -1,3 +1,6 @@
+# Author: Shailesh KumarSharma
+# Email: shaileshksharma12@gmail.com
+
 import sys 
 import torch.nn as nn
 
@@ -42,7 +45,7 @@ def train_iter(rank, criterion, w_optimizer, w_model, w_model_backup,
             w_optimizer.step()
             
             # accuracy calculation
-            epoch_train_loss += loss.data.item()
+            epoch_train_loss += loss.item()
             epoch_batch_cnt += 1
 
             _, predicted = output.max(1)
@@ -51,7 +54,7 @@ def train_iter(rank, criterion, w_optimizer, w_model, w_model_backup,
             # print(predicted, target)
             completed_steps += 1
             # print(rank, batch_idx, 'Acc: %.3f%% (%d/%d)'
-                #   % (100. * correct / total, correct, total), loss.data.item())
+                #   % (100. * correct / total, correct, total), loss.item())
             sys.stdout.flush()
 
     delta_ws = []

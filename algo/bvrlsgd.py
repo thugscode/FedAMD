@@ -1,9 +1,12 @@
+# Author: Shailesh KumarSharma
+# Email: shaileshksharma12@gmail.com
+
 import sys
 import torch
 import torch.nn as nn
 from copy import deepcopy
 from torch.optim import SGD
-import algo.fedamd as fedamd_algo
+import algo.fedadapt as fedadapt_algo
 import math
 
 def check_accuracy(epoch, loader, model, device):
@@ -85,23 +88,23 @@ def train_iter(rank, criterion, w_optimizer, w_model, w_model_backup,
             loss = criterion(output, target)
             loss.backward()
 
-            # param_grad=[]  #一个client的所有梯度
+            # List for storing parameter gradients
             for p_idx, param in enumerate(w_model.parameters()):
                 
-                param_grad[p_idx] = param_grad[p_idx] - list(last_model.parameters())[p_idx].grad.data.clone().detach() \
-                    + list(w_model.parameters())[p_idx].grad.data.clone().detach()
+                param_grad[p_idx] = param_grad[p_idx] - list(last_model.parameters())[p_idx].grad.clone().detach() \
+                    + list(w_model.parameters())[p_idx].grad.clone().detach()
                 
             last_model = deepcopy(w_model)
             last_optimizer = SGD(last_model.parameters(), lr=args.lr)
             
             for p_idx, param in enumerate(last_model.parameters()):
-                param.data = list(w_model.parameters())[p_idx].data.clone().detach()
+                param.data.copy_(list(w_model.parameters())[p_idx].data)
             
             for p_idx, param in enumerate(w_model.parameters()):
                 param.data -= learning_rate * param_grad[p_idx]
 
             # accuracy calculation
-            epoch_train_loss += loss.data.item()
+            epoch_train_loss += loss.item()
             epoch_batch_cnt += 1
             
             _, predicted = output.max(1)
@@ -142,12 +145,12 @@ def compute_grad(criterion, w_model, data_target, device):
     loss.backward(retain_graph = True)
 
     # accuracy calculation
-    epoch_train_loss += loss.data.item()
+    epoch_train_loss += loss.item()
     
     delta_ws = []
 
     for p_idx, param in enumerate(w_model.parameters()):
-        grad_tmp = param.grad.data.clone().detach()
+        grad_tmp = param.grad.clone().detach()
         delta_ws.append(grad_tmp)
 
     return delta_ws, epoch_train_loss

@@ -1,3 +1,6 @@
+# Author: Shailesh KumarSharma
+# Email: shaileshksharma12@gmail.com
+
 from copy import deepcopy
 import sys
 import torch.nn as nn
@@ -66,24 +69,23 @@ def train_iter(rank, criterion, w_optimizer, last_model, w_model, w_model_backup
         loss = criterion(output, target)
         loss.backward()
 
-        # param_grad=[]  #一个client的所有梯度
+        # List for storing parameter gradients
         for p_idx, param in enumerate(w_model.parameters()):
             
-            param_grad[p_idx] = param_grad[p_idx] - list(last_model.parameters())[p_idx].grad.data.clone().detach() \
-                + list(w_model.parameters())[p_idx].grad.data.clone().detach()
+            param_grad[p_idx] = param_grad[p_idx] - list(last_model.parameters())[p_idx].grad.clone().detach() \
+                + list(w_model.parameters())[p_idx].grad.clone().detach()
         
 
         last_model = deepcopy(w_model)
         last_optimizer = SGD(last_model.parameters(), lr=args.lr)
         
         for p_idx, param in enumerate(last_model.parameters()):
-            param.data = list(w_model.parameters())[p_idx].data.clone().detach()
-        
+                param.data.copy_(list(w_model.parameters())[p_idx].data)
         for p_idx, param in enumerate(w_model.parameters()):
             param.data -= learning_rate * param_grad[p_idx]
 
         # accuracy calculation
-        epoch_train_loss += loss.data.item()
+        epoch_train_loss += loss.item()
         epoch_batch_cnt += 1
         
         _, predicted = output.max(1)
@@ -92,7 +94,7 @@ def train_iter(rank, criterion, w_optimizer, last_model, w_model, w_model_backup
 
         completed_steps += 1
         # print(rank, batch_id, 'Acc: %.3f%% (%d/%d)'
-        #       % (100. * correct / total, correct, total), loss.data.item(), time.time() - batch_start_time)
+        #       % (100. * correct / total, correct, total), loss.item(), time.time() - batch_start_time)
         sys.stdout.flush()
 
     delta_ws = []

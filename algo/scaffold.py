@@ -1,3 +1,5 @@
+# Author: Shailesh KumarSharma
+# Email: shaileshksharma12@gmail.com
 import sys 
 import torch
 import torch.nn as nn
@@ -46,11 +48,11 @@ def train_iter(rank, criterion, w_optimizer, w_model, w_model_backup,
             loss.backward()
             
             for p_idx, param in enumerate(w_model.parameters()):
-                next_local_direction[p_idx] += (param.grad.data.clone().detach().to(device) / maximum_steps)
-                param.data = param.data - learning_rate * (param.grad.data.clone().detach() - local_direction[p_idx] + global_direction[p_idx])
+                next_local_direction[p_idx] += (param.grad.clone().detach().to(device) / maximum_steps)
+                param.data = param.data - learning_rate * (param.grad.clone().detach() - local_direction[p_idx] + global_direction[p_idx])
             
             # accuracy calculation
-            epoch_train_loss += loss.data.item()
+            epoch_train_loss += loss.item()
             epoch_batch_cnt += 1
 
             _, predicted = output.max(1)
@@ -59,7 +61,7 @@ def train_iter(rank, criterion, w_optimizer, w_model, w_model_backup,
 
             completed_steps += 1
             # print(rank, batch_id, 'Acc: %.3f%% (%d/%d)'
-            #       % (100. * correct / total, correct, total), loss.data.item(), time.time() - batch_start_time)
+            #       % (100. * correct / total, correct, total), loss.item(), time.time() - batch_start_time)
             sys.stdout.flush()
 
     delta_ws = []

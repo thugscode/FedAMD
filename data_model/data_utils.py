@@ -1,3 +1,6 @@
+# Author: Shailesh KumarSharma
+# Email: shaileshksharma12@gmail.com
+
 # from random import Random
 from copy import deepcopy
 import random

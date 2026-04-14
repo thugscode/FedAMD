@@ -1,3 +1,6 @@
+# Author: Shailesh KumarSharma
+# Email: shaileshksharma12@gmail.com
+
 from cProfile import label
 import numpy as np
 from copy import deepcopy
@@ -10,7 +13,7 @@ from torch.optim import SGD
 import sys
 import random
 
-def fedamd_arguments():
+def fedadapt_arguments():
     parser = argparse.ArgumentParser(description='Model Training')
     # Method description
     parser.add_argument('--method', type=str, default='FedAvg', help='Running algorithm')
@@ -87,24 +90,24 @@ def run(workers, model, args, data_ratio_pairs, data_ratio_pairs_full_batch, tes
     # --- initialization ---
 
     import algo.fedavg as fedavg
-    import algo.fedamd as fedamd_algo
+    import algo.fedadapt as fedadapt_algo
     import algo.fedpage as fedpage
     import algo.scaffold as scaffold
 
     full_batch_grad = []
     pr = args.pr
-    if args.method == "FedAMD" or args.method == "SCAFFOLD":    
+    if args.method == "FedAdapt" or args.method == "SCAFFOLD":    
         for worker in workers:
             mymodel = deepcopy(model)
             criterion = torch.nn.CrossEntropyLoss()
             optimizer = SGD(mymodel.parameters(), lr=args.lr)
 
-            grad, _ = fedamd_algo.compute_grad(worker, criterion, optimizer, mymodel, model, 
+            grad, _ = fedadapt_algo.compute_grad(worker, criterion, optimizer, mymodel, model, 
                 data_ratio_pairs_full_batch, gpu)
             full_batch_grad.append(grad)
             print("finish full batch", worker)
         
-        if args.method == "FedAMD" and pr >= 1.0:
+        if args.method == "FedAdapt" and pr >= 1.0:
             pr = int(pr)
     elif args.method == "FedPAGE":
         pr = 0.5
@@ -133,13 +136,13 @@ def run(workers, model, args, data_ratio_pairs, data_ratio_pairs_full_batch, tes
 
         # --- local iteration ---
         
-        if args.method == "FedAMD":            
+        if args.method == "FedAdapt":            
             # --- time series [deprecated] ---
             if args.ts:
                 pr = min(1/math.log(max((t+14)/5, math.e)), 1.0)
             print(pr)
 
-            # --- fedamd algorithm ---
+            # --- fedadapt algorithm ---
             global_direction = []
             for p_idx, param in enumerate(model.parameters()):
                 param_dir = torch.zeros_like(param.data)
@@ -156,13 +159,13 @@ def run(workers, model, args, data_ratio_pairs, data_ratio_pairs_full_batch, tes
 
                 if (pr < 1 and np.random.choice([True, False], p=[pr, 1-pr])) or (pr > 1 and t % pr == 0):
                     # Anchor group 
-                    grad, _ = fedamd_algo.compute_grad(worker, criterion, optimizer, mymodel, model, 
+                    grad, _ = fedadapt_algo.compute_grad(worker, criterion, optimizer, mymodel, model, 
                         data_ratio_pairs_full_batch, gpu)
                     full_batch_grad[worker] = grad
                     print("update full batch direction", worker)
                 else:
                     # Miner group 
-                    grad, loss, acc = fedamd_algo.fedamd_train_iter(worker, criterion, optimizer, mymodel, model, 
+                    grad, loss, acc = fedadapt_algo.fedadapt_train_iter(worker, criterion, optimizer, mymodel, model, 
                         data_ratio_pairs, global_direction, args, gpu)
                     
                     tot_loss += loss
@@ -180,7 +183,7 @@ def run(workers, model, args, data_ratio_pairs, data_ratio_pairs_full_batch, tes
                     mymodel = deepcopy(model)
                     criterion = torch.nn.CrossEntropyLoss()
                     optimizer = SGD(mymodel.parameters(), lr=args.lr)
-                    grad, loss = fedamd_algo.compute_grad(worker, criterion, optimizer, mymodel, model, 
+                    grad, loss = fedadapt_algo.compute_grad(worker, criterion, optimizer, mymodel, model, 
                         data_ratio_pairs_full_batch, gpu)
                     tot_loss += loss
                     
@@ -279,7 +282,7 @@ def run(workers, model, args, data_ratio_pairs, data_ratio_pairs_full_batch, tes
                 return 
 
 if __name__ == "__main__":
-    args = fedamd_arguments()
+    args = fedadapt_arguments()
     print(args)
 
     data_tuple = []

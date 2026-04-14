@@ -1,3 +1,6 @@
+# Author: Shailesh KumarSharma
+# Email: shaileshksharma12@gmail.com
+
 from torchvision.datasets import FashionMNIST
 import numpy as np
 from torch.utils.data import DataLoader

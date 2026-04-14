@@ -5,6 +5,9 @@ This is full set for cifar datasets (CIFAR-10 and CIFAR100)
 Models: CNN, LeNet, AlexNet, ResNet, LR, VGG
 '''
 
+# Author: Shailesh KumarSharma
+# Email: shaileshksharma12@gmail.com
+
 import math
 
 import torch
